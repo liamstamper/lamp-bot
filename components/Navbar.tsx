@@ -13,7 +13,13 @@ export default function Navbar() {
           Lamp 🛋️
         </Link>
       </div>
-      <div>
+      <div className="space-x-2">
+        <Link href={"/quickstart"}>
+          {" "}
+          <Button variant={"outline"} className="cursor-pointer">
+            QuickStart
+          </Button>
+        </Link>
         <Link href={"/howitworks"}>
           <Button className="cursor-pointer">How it Works</Button>
         </Link>

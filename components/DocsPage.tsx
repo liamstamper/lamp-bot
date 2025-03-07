@@ -1,5 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 interface DocsPageProps {
   title: string;
@@ -41,7 +42,7 @@ const DocsPage = (props: DocsPageProps) => {
                 Join us and experience seamless AI-driven PR reviews.
               </p>
               <Button size="lg" asChild>
-                <a href="#">Get Started</a>
+                <Link href="/quickstart">Get Started</Link>
               </Button>
             </CardContent>
           </Card>

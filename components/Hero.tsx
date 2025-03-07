@@ -9,7 +9,7 @@ const Hero = () => {
           {/* Title */}
           <div className="flex-1 text-center md:text-left">
             <h1 className="max-w-2xl text-4xl font-bold leading-tight text-foreground md:text-5xl lg:text-6xl">
-              AI-Powered PR Review Bot for Seamless Code Collaboration
+              Seamless Collaboration with AI-Powered Code Review
             </h1>
             <p className="mt-4 text-lg text-muted-foreground md:text-xl">
               Automate and accelerate your code reviews with intelligent AI
@@ -18,9 +18,16 @@ const Hero = () => {
             </p>
             <div className="mt-6 space-x-2">
               <Button>Get Started</Button>
-              <Button variant={"outline"}>
-                View On Github <ArrowRight className="ml-2 size-4" />
-              </Button>
+              <a
+                href="https://github.com/liamstamper/lamp-bot"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {" "}
+                <Button variant={"outline"}>
+                  View On Github <ArrowRight className="ml-2 size-4" />
+                </Button>
+              </a>
             </div>
             <div className="mt-4">
               <p className="text-sm text-muted-foreground italic">
