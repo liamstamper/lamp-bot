@@ -1,9 +1,15 @@
-import { useEffect, useState } from 'react'
-import Hello from './Hello'
+import Hero from "../components/Hero";
+import Navbar from "../components/Navbar";
 
-export default function Home() {
-
-  return <div>
-            <Hello />
-            </div>
+function Home() {
+  return (
+    <>
+      <Navbar />
+      <div className="flex flex-col items-center justify-center">
+        <Hero />
+      </div>
+    </>
+  );
 }
+
+export default Home;
