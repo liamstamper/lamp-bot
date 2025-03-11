@@ -1,6 +1,7 @@
 import { Hono } from "hono";
 import { handle } from "hono/vercel";
 import { promptModel } from "./helpers/Groq";
+import { getInstallationAccessToken } from "./helpers/githubAuth";
 
 export const dynamic = "force-dynamic";
 
@@ -62,10 +63,12 @@ const fetchPRChanges = async (
   repo: string,
   prNumber: number
 ): Promise<{ filename: string; status: string }[]> => {
+  const token = await getInstallationAccessToken();
+
   const response = await fetch(
     `https://api.github.com/repos/${owner}/${repo}/pulls/${prNumber}/files`,
     {
-      headers: { Authorization: `token ${process.env.GITHUB_TOKEN}` },
+      headers: { Authorization: `token ${token}` },
     }
   );
 
@@ -92,12 +95,14 @@ const postReview = async (
   prNumber: number,
   review: string
 ) => {
+  const token = await getInstallationAccessToken();
+
   const response = await fetch(
     `https://api.github.com/repos/${owner}/${repo}/issues/${prNumber}/comments`,
     {
       method: "POST",
       headers: {
-        Authorization: `token ${process.env.GITHUB_TOKEN}`,
+        Authorization: `token ${token}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ body: review }),

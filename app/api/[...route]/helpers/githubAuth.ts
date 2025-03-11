@@ -1,0 +1,56 @@
+import jwt from "jsonwebtoken";
+
+/**
+ * Generates a JSON Web Token (JWT) for authenticating a GitHub App.
+ *
+ * @returns {string} The signed JWT token.
+ */
+export function createAppJwt(): string {
+  const appId = process.env.GITHUB_APP_ID;
+  const privateKey = process.env.GITHUB_APP_PRIVATE_KEY;
+
+  if (!appId || !privateKey) {
+    throw new Error("Missing GITHUB_APP_ID or GITHUB_APP_PRIVATE_KEY");
+  }
+  const now = Math.floor(Date.now() / 1000);
+  const payload = {
+    iat: now, // Issued at time
+    exp: now + 60 * 8, // JWT expiry (max 10 minutes, here we do 8 for safety)
+    iss: appId, // GitHub App's App ID
+  };
+
+  const token = jwt.sign(payload, privateKey, { algorithm: "RS256" });
+  return token;
+}
+
+/**
+ ** This function generates a JSON Web Token (JWT) for authenticating a GitHub App.
+ * @returns {string} The installation token.
+ */
+export async function getInstallationAccessToken(): Promise<string> {
+  const installationId = process.env.GITHUB_INSTALLATION_ID;
+  if (!installationId) {
+    throw new Error("Missing GITHUB_INSTALLATION_ID");
+  }
+
+  const jwt = createAppJwt();
+
+  const response = await fetch(
+    `https://api.github.com/app/installations/${installationId}/access_tokens`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+        Accept: "application/vnd.github+json",
+      },
+    }
+  );
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`Failed to create installation token: ${errorText}`);
+  }
+
+  const data = await response.json();
+  return data.token;
+}
