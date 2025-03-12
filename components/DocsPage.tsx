@@ -1,6 +1,9 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import Markdown from "./ui/markdown";
 
 interface DocsPageProps {
   title: string;
@@ -28,7 +31,7 @@ const DocsPage = (props: DocsPageProps) => {
         {/* Article Content */}
         <div className="text-lg leading-relaxed text-foreground space-y-4">
           {props.content.map((item, index) => (
-            <p key={index}>{item}</p>
+            <Markdown key={index}>{item}</Markdown>
           ))}
         </div>
         {props.showCTA && (
@@ -42,7 +45,7 @@ const DocsPage = (props: DocsPageProps) => {
                 Join us and experience seamless AI-driven PR reviews.
               </p>
               <Button size="lg" asChild>
-                <Link href="/quickstart">Get Started</Link>
+                <Link href="/quickstart">QuickStart</Link>
               </Button>
             </CardContent>
           </Card>
