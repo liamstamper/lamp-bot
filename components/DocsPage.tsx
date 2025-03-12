@@ -27,8 +27,8 @@ const DocsPage = (props: DocsPageProps) => {
 
         {/* Article Content */}
         <div className="text-lg leading-relaxed text-foreground space-y-4">
-          {props.content.map((item) => (
-            <p>{item}</p>
+          {props.content.map((item, index) => (
+            <p key={index}>{item}</p>
           ))}
         </div>
         {props.showCTA && (
