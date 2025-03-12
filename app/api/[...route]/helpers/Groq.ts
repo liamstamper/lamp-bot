@@ -4,34 +4,30 @@ const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
 export const promptModel = async (diff: string) => {
   const prompt = `
-Analyze the provided code diff and conduct a detailed code review. Your review should include the following sections:
+Analyze the provided code diff and conduct a detailed code review. Your review should include specific code references. When referencing code lines: 
+
+Only show the relevant snippet (no more than ~5 lines around the problematic area).
+Mask or remove any sensitive information (e.g., API keys, secrets, user credentials) and replace them with <REDACTED>. 
+Enclose code in triple backticks with proper syntax highlighting for clarity. 
+Your review should contain the following sections: 
 
 Summary
-Provide a concise overview of the key issues found in the PR.
-Highlight the most critical changes needed before merging.
+A concise overview of the key issues.
+
 Code Quality & Best Practices
+Identify potential bugs, logic errors, or bad practices, referencing specific lines/snippets safely.
 
-Identify potential bugs, logic errors, or bad practices.
-Ensure adherence to clean coding principles (naming conventions, structure, consistency).
-Flag any anti-patterns or redundant code that could be refactored.
 Readability & Maintainability
-
-Check if the code is clear, well-structured, and easy to understand.
-Suggest improvements for modularity, reusability, and organization.
-Recommend more descriptive variable names, function decomposition, or clarifying comments if needed.
+Suggest improvements and reference code snippets where clarity is needed.
 
 Performance & Efficiency
-Identify inefficient operations, redundant computations, or unnecessary complexity.
-Propose optimizations to improve execution time and memory usage.
+Address any inefficiencies with code samples illustrating the problems.
+
 Security & Reliability
+Highlight security concerns with relevant sanitized code examples.
 
-Highlight any potential security risks (e.g., unsafe input handling, insecure data storage).
-Verify that error handling is robust and suggest best practices to improve reliability.
 Actionable Suggestions
-
-Reference specific lines of code or snippets to clarify each piece of feedback.
-Provide concise justifications for each suggestion.
-Offer direct, actionable steps to resolve the issues.
+Provide short, specific steps for fixing each issue. Include inline code snippets wherever it helps clarify the solution.
 
 Use Markdown for headings and formatting in your response. Do not include any disclaimers or references to external constraints—provide only the structured review content as specified. If no diff is provided, respond with “No code changes to review.” and nothing else.
 
