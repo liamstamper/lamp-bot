@@ -1,34 +1,30 @@
-This is a [honojs/hono](https://hono.dev/) + [Next.js](https://nextjs.org/) project forked from [templates](https://github.com/honojs/starter/tree/main/templates/nextjs) and updated to use Nextjs' App Router.
+<p align="center">
+ <img width="100px" src="public/favicon.png" align="center" alt="GitHub Readme Stats" style="border-radius: 50px;" />
+ <h2 align="center" style="border-radius: 10px; overflow: hidden;">Lamp</h2>
+ <p align="center" style="border-radius: 10px; overflow: hidden;">AI-Powered Code Review for your Pull Requests</p>
+</p>
+<p align="center">
+    <img src="https://img.shields.io/badge/License-MIT-green.svg"/>
+    <img src="https://img.shields.io/badge/Hosted%20on-Vercel-black?logo=vercel"/>
+</p>
+
+
+
+
+
+Lamp is a GitHub App that automatically reviews Pull Requests and posts AI-generated feedback. Built with Next.js Hono, it listens for webhook events, fetches changed files, and generates comments on open PRs—helping teams quickly review and refine their code.
 
 ## Getting Started
 
-First, run the development server:
+1. **Install the App**  
+   Head over to the [Lamp PR Bot App Page](https://github.com/apps/lamp-pr-bot).  
+   - Click **Install** to grant Lamp access to your desired repositories.  
+   - Choose whether to limit installation to specific repos or all repos in your account.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+2. **Open a Pull Request**  
+   - Once installed, open (or update) a PR in any repo where Lamp is installed.  
+   - Lamp automatically listens for the `pull_request` event.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the API by modifying `app/api/[...route]/route.tsx` and learn more by taking a look to the [API documentation](https://hono.dev/api/hono).
-
-## Learn More
-
-To learn more about Hono and Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Hono + Next.js app is to use the [Vercel Platform](https://vercel.com/templates?search=hono) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+3. **Receive AI-Generated Feedback**  
+   - The bot reviews the PR’s changed files and posts a comment with AI-based suggestions.  
+   - Collaborators can then refine and merge with greater confidence.
