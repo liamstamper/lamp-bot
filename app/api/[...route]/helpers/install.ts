@@ -16,13 +16,13 @@ export async function saveInstallation(payload: any) {
 
   // Inserts or updates record
   const query = `
-    INSERT INTO installations 
+    INSERT INTO installations
       (installation_id, account_login, account_id, account_type)
     VALUES ($1, $2, $3, $4)
-    ON CONFLICT (installation_id) 
+    ON CONFLICT (account_id)
     DO UPDATE 
-        SET account_login = EXCLUDED.account_login,
-            account_id = EXCLUDED.account_id,
+        SET installation_id = EXCLUDED.installation_id,
+            account_login = EXCLUDED.account_login,
             account_type = EXCLUDED.account_type,
             updated_at = now();
   `;
