@@ -69,7 +69,7 @@ const fetchPRChanges = async (
   repo: string,
   prNumber: number
 ): Promise<{ filename: string; status: string }[]> => {
-  const token = await getInstallationAccessToken();
+  const token = await getInstallationAccessToken(owner);
 
   const response = await fetch(
     `https://api.github.com/repos/${owner}/${repo}/pulls/${prNumber}/files`,
@@ -101,7 +101,7 @@ const postReview = async (
   prNumber: number,
   review: string
 ) => {
-  const token = await getInstallationAccessToken();
+  const token = await getInstallationAccessToken(owner);
 
   const response = await fetch(
     `https://api.github.com/repos/${owner}/${repo}/issues/${prNumber}/comments`,

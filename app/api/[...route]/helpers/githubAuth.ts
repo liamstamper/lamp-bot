@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import { pool } from "./db";
 
 /**
  * Generates a JSON Web Token (JWT) for authenticating a GitHub App.
@@ -24,13 +25,30 @@ export function createAppJwt(): string {
 }
 
 /**
- ** This function generates a JSON Web Token (JWT) for authenticating a GitHub App.
+ * Looks up the GitHub app installation ID from the database and exchanges it
+ * for an installation access Token using GitHub's API.
+ *
  * @returns {string} The installation token.
  */
-export async function getInstallationAccessToken(): Promise<string> {
-  const installationId = process.env.GITHUB_INSTALLATION_ID;
+export async function getInstallationAccessToken(
+  login: string
+): Promise<string> {
+  const result = await pool.query(
+    `
+      SELECT installation_id
+      FROM installations
+      WHERE account_login = $1
+      LIMIT 1
+    `,
+    [login]
+  );
+  if (result.rows.length === 0) {
+    throw new Error(`No installation found for login: ${login}`);
+  }
+
+  const installationId = result.rows[0].installation_id;
   if (!installationId) {
-    throw new Error("Missing GITHUB_INSTALLATION_ID");
+    throw new Error(`Missing installation_id in DB for login: ${login}`);
   }
 
   const jwt = createAppJwt();
