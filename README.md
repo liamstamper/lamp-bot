@@ -1,7 +1,7 @@
 <p align="center">
  <img width="100px" src="public/favicon.png" align="center" alt="GitHub Readme Stats" style="border-radius: 50px;" />
- <h2 align="center" style="border-radius: 10px; overflow: hidden;">Lamp</h2>
- <p align="center" style="border-radius: 10px; overflow: hidden;">AI-Powered Code Review for your Pull Requests</p>
+ <h1 align="center" style="border-radius: 10px; overflow: hidden;">Lamp</h1>
+ <p align="center" style="border-radius: 10px; overflow: hidden;">An AI-Powered Code Review Bot for your Pull Requests</p>
 </p>
 <p align="center">
     <img src="https://img.shields.io/badge/License-MIT-green.svg"/>
@@ -11,6 +11,7 @@
 
 
 
+## Description
 
 Lamp is a GitHub App that automatically reviews Pull Requests and posts AI-generated feedback. Built with Next.js Hono, it listens for webhook events, fetches changed files, and generates comments on open PRs—helping teams quickly review and refine their code.
 
