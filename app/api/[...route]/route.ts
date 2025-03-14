@@ -24,10 +24,19 @@ app.post("/webhook", async (c) => {
   // Handle for installation event
   if (payload.installation) {
     await saveInstallation(payload);
+    return c.json({ message: "Installation event processed." });
   }
 
   // Handle pull_request events
   if (payload.pull_request) {
+    if (
+      !payload.repository ||
+      !payload.repository.owner ||
+      !payload.repository.owner.login
+    ) {
+      console.error("Missing repository owner info in payload:", payload);
+      return c.json({ message: "Missing repository owner information." }, 400);
+    }
     const owner = payload.repository.owner.login;
     const repo = payload.repository.name;
     const prNumber = payload.pull_request.number;
