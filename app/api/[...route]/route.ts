@@ -100,9 +100,12 @@ const fetchPRChanges = async (
 ): Promise<{ filename: string; status: string }[]> => {
   const token = await getInstallationAccessToken(owner);
 
+
   const response = await fetch(`${htmlUrl}/files`, {
     headers: { Authorization: `token ${token}` },
   });
+
+  console.log("Received response: ", response);
 
   if (!response.ok) {
     const errorText = await response.text();
