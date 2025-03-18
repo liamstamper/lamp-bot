@@ -62,7 +62,7 @@ app.post("/webhook", async (c) => {
   console.log(`PR #${prNumber} opened by ${owner} in ${repo}: ${htmlUrl}`);
 
 
-    const changes = await fetchPRChanges(htmlUrl, owner);
+    const changes = await fetchPRChanges(owner, htmlUrl);
 
     const diff = changes
       .map((file) => `${file.filename}: ${file.status}`)
