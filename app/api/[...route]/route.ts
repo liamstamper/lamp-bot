@@ -29,26 +29,32 @@ app.post("/webhook", async (c) => {
 
   // Handle pull_request events
   if (payload.pull_request) {
-    if (!payload.pull_request.user.login || !payload.pull_request.user) {
-      return c.json({ message: "login not found", status: 500 });
+    if (!payload.pull_request.user || !payload.pull_request.user.login) {
+      return c.json({ message: "login not found" }, 500);
     }
     if (!payload.pull_request.pull_request.html_url) {
-      return c.json({
-        message: "pull_request.pull_request.html_url not found",
-        status: 500,
-      });
+      return c.json(
+        {
+          message: "pull_request.pull_request.html_url not found",
+        },
+        500
+      );
     }
     if (!payload.pull_request.repository.name) {
-      return c.json({
-        message: "pull_request.repository.name not found",
-        status: 500,
-      });
+      return c.json(
+        {
+          message: "pull_request.repository.name not found",
+        },
+        500
+      );
     }
     if (!payload.pull_request.pull_request.number) {
-      return c.json({
-        message: "pull_request.pull_request.number not found",
-        status: 500,
-      });
+      return c.json(
+        {
+          message: "pull_request.pull_request.number not found",
+        },
+        500
+      );
     }
     const htmlUrl = payload.pull_request.html_url;
     const owner = payload.pull_request.user.login;
