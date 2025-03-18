@@ -11,6 +11,7 @@
 
 
 
+
 ## Description
 
 Lamp is a GitHub App that automatically reviews Pull Requests and posts AI-generated feedback. Built with Next.js Hono, it listens for webhook events, fetches changed files, and generates comments on open PRs—helping teams quickly review and refine their code.
