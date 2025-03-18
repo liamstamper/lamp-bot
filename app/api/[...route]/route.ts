@@ -21,52 +21,46 @@ app.get("/hello", (c) => {
 app.post("/webhook", async (c) => {
   const payload = await c.req.json();
 
-  if (payload) {
-  console.log("Received webhook event:", payload);
-  return c.json({ message: "Received webhook event: ", payload });
- 
-  }
-
-  // Handle for installation event
-  if (payload.installation) {
-    await saveInstallation(payload);
-    return c.json({ message: "Installation event processed." });
-  }
-
   // Handle pull_request events
   if (payload.pull_request) {
     console.log("Received pull_request event:", payload.pull_request);
+  
     if (!payload.pull_request.user || !payload.pull_request.user.login) {
       return c.json({ message: "login not found" }, 500);
     }
-    if (!payload.pull_request.pull_request.html_url) {
+    if (!payload.pull_request.html_url) {  // FIXED: `pull_request.pull_request.html_url` -> `pull_request.html_url`
       return c.json(
         {
-          message: "pull_request.pull_request.html_url not found",
+          message: "pull_request.html_url not found",
         },
         500
       );
     }
-    if (!payload.pull_request.repository.name) {
+    if (!payload.repository || !payload.repository.name) { // FIXED: pull_request.repository -> repository
       return c.json(
         {
-          message: "pull_request.repository.name not found",
+          message: "repository.name not found",
         },
         500
       );
     }
-    if (!payload.pull_request.pull_request.number) {
+    if (!payload.pull_request.number) { // FIXED: `pull_request.pull_request.number` -> `pull_request.number`
       return c.json(
         {
-          message: "pull_request.pull_request.number not found",
+          message: "pull_request.number not found",
         },
         500
       );
     }
-    const htmlUrl = payload.pull_request.html_url;
-    const owner = payload.pull_request.user.login;
-    const repo = payload.repository.name;
-    const prNumber = payload.pull_request.number;
+
+  // Extract relevant data correctly
+  const htmlUrl = payload.pull_request.html_url;
+  const owner = payload.pull_request.user.login;
+  const repo = payload.repository.name;
+  const prNumber = payload.pull_request.number;
+
+  console.log(`PR #${prNumber} opened by ${owner} in ${repo}: ${htmlUrl}`);
+
 
     const changes = await fetchPRChanges(htmlUrl, owner);
 
