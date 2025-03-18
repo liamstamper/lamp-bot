@@ -30,4 +30,3 @@ Lamp is a GitHub App that automatically reviews Pull Requests and posts AI-gener
 3. **Receive AI-Generated Feedback**  
    - The bot reviews the PR’s changed files and posts a comment with AI-based suggestions.  
    - Collaborators can then refine and merge with greater confidence.
-
