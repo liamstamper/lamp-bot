@@ -29,19 +29,12 @@ app.post("/webhook", async (c) => {
 
   // Handle pull_request events
   if (payload.pull_request) {
-    if (
-      !payload.repository ||
-      !payload.repository.owner ||
-      !payload.repository.owner.login
-    ) {
-      console.error("Missing repository owner info in payload:", payload);
-      return c.json({ message: "Missing repository owner information." }, 400);
-    }
-    const owner = payload.repository.owner.login;
+    const htmlUrl = payload.pull_request.html_url;
+    const owner = payload.pull_request.user.login;
     const repo = payload.repository.name;
     const prNumber = payload.pull_request.number;
 
-    const changes = await fetchPRChanges(owner, repo, prNumber);
+    const changes = await fetchPRChanges(htmlUrl, owner);
 
     const diff = changes
       .map((file) => `${file.filename}: ${file.status}`)
@@ -75,17 +68,13 @@ app.post("/webhook", async (c) => {
  */
 const fetchPRChanges = async (
   owner: string,
-  repo: string,
-  prNumber: number
+  htmlUrl: string
 ): Promise<{ filename: string; status: string }[]> => {
   const token = await getInstallationAccessToken(owner);
 
-  const response = await fetch(
-    `https://api.github.com/repos/${owner}/${repo}/pulls/${prNumber}/files`,
-    {
-      headers: { Authorization: `token ${token}` },
-    }
-  );
+  const response = await fetch(`${htmlUrl}/files`, {
+    headers: { Authorization: `token ${token}` },
+  });
 
   if (!response.ok) {
     const errorText = await response.text();
