@@ -21,6 +21,12 @@ app.get("/hello", (c) => {
 app.post("/webhook", async (c) => {
   const payload = await c.req.json();
 
+  if (payload) {
+  console.log("Received webhook event:", payload);
+  return c.json({ message: "Received webhook event: ", payload });
+ 
+  }
+
   // Handle for installation event
   if (payload.installation) {
     await saveInstallation(payload);
