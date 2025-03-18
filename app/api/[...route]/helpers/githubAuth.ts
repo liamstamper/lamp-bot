@@ -42,6 +42,7 @@ export async function getInstallationAccessToken(
     `,
     [login]
   );
+  console.log("Query result:", result.rows); // Check the output
   if (result.rows.length === 0) {
     throw new Error(`No installation found for login: ${login}`);
   }
