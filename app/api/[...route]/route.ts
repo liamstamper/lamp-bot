@@ -29,6 +29,7 @@ app.post("/webhook", async (c) => {
 
   // Handle pull_request events
   if (payload.pull_request) {
+    console.log("Received pull_request event:", payload.pull_request);
     if (!payload.pull_request.user || !payload.pull_request.user.login) {
       return c.json({ message: "login not found" }, 500);
     }
