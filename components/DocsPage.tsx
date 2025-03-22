@@ -4,10 +4,13 @@ import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import Markdown from "./ui/markdown";
+import Image from "next/image";
+import image from "next/image";
 
 interface DocsPageProps {
   title: string;
   subtitle: string;
+  image: string;
   content: string[];
   showCTA?: boolean;
 }
@@ -21,11 +24,19 @@ const DocsPage = (props: DocsPageProps) => {
         </h1>
 
         {/* Subtitle */}
-        <div className="text-sm text-muted-foreground">{props.subtitle}</div>
+        <div className="text-sm text-muted-foreground">
+          <Markdown>{props.subtitle}</Markdown>
+        </div>
 
         {/* Cover Image  */}
-        <div className="w-full h-64 bg-gray-300 rounded-lg shadow-md flex items-center justify-center text-muted-foreground">
-          <span>Blog Cover Image</span>
+        <div className="relative w-full aspect-[16/9] py-4 bg-gray-50/10 rounded-lg shadow-md flex items-center justify-center text-muted-foreground">
+          <Image
+            src={props.image}
+            alt="Cover Image"
+            fill
+            className="object-contain rounded-lg border border-gray-200"
+            priority
+          />
         </div>
 
         {/* Article Content */}
