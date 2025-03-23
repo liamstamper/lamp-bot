@@ -3,12 +3,18 @@ import Navbar from "@/components/Navbar";
 
 const testdata = {
   title: "Lamp QuickStart",
-  subtitle: "",
+  subtitle: "By [Liam Stamper](https://github.com/liamstamper)",
+  image: "/quickstart.png",
   content: [
-    "**Set Up:** First you add the app to your repositiory. To do this navigate to [https://github.com/apps/lamp-pr-bot](https://github.com/apps/lamp-pr-bot)",
     "This guide walks you through setting up and running your AI-powered code review bot using Vite and Hono. The bot integrates with GitHub, listens for commits and pull requests, and provides automated AI-generated feedback.",
-    " With AI-driven tools, developers can now automate large parts of the review process, detecting bugs, suggesting improvements, and enforcing coding standards with minimal human intervention.",
-    "In this article, we explore how AI-powered code review bots, like the one we’re building, can enhance team efficiency and productivity.",
+    "**1. Install Lamp PR Bot on Your GitHub Repository**",
+    "Go to: [https://github.com/apps/lamp-pr-bot](https://github.com/apps/lamp-pr-bot)",
+    "**2. Click 'Install'**",
+    "Follow the prompts to give Lamp PR Bot access to the repositories you want it to review.",
+    "**3. Confirm Permissions**",
+    "You’ll be asked to confirm what repositories to grant access to. This is where you can choose either:",
+    "4. **Complete the Installation**",
+    "That’s it—your GitHub repository is now set up to use Lamp PR Bot.",
   ],
   showCTA: false,
 };
