@@ -2,6 +2,7 @@ import { Hono } from "hono";
 import { handle } from "hono/vercel";
 import { promptModel } from "./helpers/Groq";
 import { getInstallationAccessToken } from "./helpers/githubAuth";
+import { saveInstallation } from "./helpers/install";
 
 export const dynamic = "force-dynamic";
 
@@ -19,6 +20,12 @@ app.get("/hello", (c) => {
  */
 app.post("/webhook", async (c) => {
   const payload = await c.req.json();
+
+  // Handle installation
+  if (payload.installation) {
+    await saveInstallation(payload);
+    return c.json({ message: "Installation event processed." });
+  }
 
   // Handle pull_request events
   if (payload.pull_request) {
