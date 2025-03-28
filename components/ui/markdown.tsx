@@ -44,7 +44,7 @@ export default function Markdown({ children }: { children: ReactNode }) {
         code({ node, inline, className, children, ...props }) {
           if (!inline) {
             return (
-              <pre className="text-sm p-4 my-4">
+              <pre>
                 <code className={className} {...props}>
                   {children}
                 </code>
@@ -52,10 +52,7 @@ export default function Markdown({ children }: { children: ReactNode }) {
             );
           }
           return (
-            <code
-              className="bg-gray-100 text-gray-800 rounded px-1 py-0.5"
-              {...props}
-            >
+            <code className="text-gray-800" {...props}>
               {children}
             </code>
           );
