@@ -8,10 +8,10 @@ export default function LandingPage() {
     <div className="flex min-h-screen flex-col">
       <header className="sticky top-0 z-40 border-b bg-background">
         <div className="container flex h-16 items-center justify-between py-4">
-          <div className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-2">
             <Bot className="h-6 w-6" />
             <span className="text-xl font-bold">Lamp Bot</span>
-          </div>
+          </Link>
           <nav className="hidden md:flex items-center gap-6">
             <Link
               href="#features"

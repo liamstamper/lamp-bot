@@ -57,7 +57,7 @@ export default function HowItWorksPage() {
               How It Works
             </Link>
             <Link
-              href="/#pricing"
+              href="/pricing"
               className="text-sm font-medium hover:underline"
             >
               Pricing
