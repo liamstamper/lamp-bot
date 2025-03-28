@@ -294,7 +294,7 @@ export default function LandingPage() {
                   <p className="text-muted-foreground">For growing teams</p>
                 </div>
                 <div className="mb-4">
-                  <span className="text-4xl font-bold">$29</span>
+                  <span className="text-4xl font-bold">$25</span>
                   <span className="text-muted-foreground">/month</span>
                 </div>
                 <ul className="mb-8 space-y-2 text-sm">

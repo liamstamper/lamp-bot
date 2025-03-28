@@ -192,7 +192,7 @@ export default function PricingPage() {
                 <CardContent className="flex-1">
                   <div className="mb-4">
                     <span className="text-4xl font-bold">
-                      {billingCycle === "monthly" ? "$29" : "$20"}
+                      {billingCycle === "monthly" ? "$25" : "$20"}
                     </span>
                     <span className="text-muted-foreground">/month</span>
                   </div>
